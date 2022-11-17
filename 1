@@ -1,0 +1,34 @@
+import sys
+from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication, QMessageBox, QDesktopWidget)
+from PyQt5.QtGui import QFont, QIcon
+
+
+class Example(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        QToolTip.setFont(QFont('TimesNewRoman', 10))
+
+        btn = QPushButton('Button', self)
+        btn.setToolTip('я кнопка')
+        btn.resize(btn.sizeHint())
+        btn.move(100, 100)
+
+        self.setWindowIcon(QIcon('D:/Python/1.png'))
+        self.setGeometry(100, 100, 300, 300)
+        self.setWindowTitle('Последнее королевство')
+        self.show()
+
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, 'Выход', 'Вы уверены, что хотите выйти?', QMessageBox.Yes, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())
